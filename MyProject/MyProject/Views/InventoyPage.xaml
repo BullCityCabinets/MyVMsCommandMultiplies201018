@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyProject.Views.InventoyPage">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <CollectionView                 
+                x:Name="InventoryList"
+                ItemsSource="{Binding InventoryDisplayed}"
+                SelectionMode="Multiple"            
+                
+                SelectedItems="{Binding MySelectedItems, Mode=TwoWay}"                        
+                SelectionChangedCommand="{Binding MySelectionChangedCommand}"            
+                ItemSizingStrategy="MeasureFirstItem"
+                VerticalOptions="FillAndExpand"                            
+                Margin="8,4,8,4">
+
+                <!--SelectedItem="{Binding MySelectedItem, Mode=TwoWay}"-->
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout
+                            Margin="8">
+                            <Label Text="{Binding Name, StringFormat='{0}'}" FontAttributes="Bold"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Condition, StringFormat='  Condition : {0}'}"/>
+                                <Label Text="{Binding Id, StringFormat=' / ID #{0}'}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

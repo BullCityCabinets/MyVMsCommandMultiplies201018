@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyProject.Views.OrderSummaryPage">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Label Text="{Binding  LineItemsDisplayed.Count, StringFormat='Order Summary: {0} Items Total'}" FontSize="Medium" FontAttributes="Bold" Margin="8"/>
+
+            <ScrollView>            
+                
+                <StackLayout>
+                    
+                    <CollectionView x:Name="LineItemsDisplayedView"
+				        ItemsSource="{Binding LineItemsDisplayed}"
+				        ItemSizingStrategy="MeasureFirstItem"
+				        VerticalOptions="FillAndExpand"
+				        Margin="8">
+                        
+                        <CollectionView.ItemsLayout>                            
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="12"/>
+                        </CollectionView.ItemsLayout>
+                        
+                            <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout BackgroundColor="White" HeightRequest="50" Padding="18,3,18,3" Orientation="Horizontal">
+                                    <Label Text="{Binding Name}"  FontSize="Large"  VerticalOptions="Center" FontAttributes="Bold"/>
+                                        <Label Text="Qty:" FontSize="Large" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+                                    <Entry Text="{Binding Qty, Mode=TwoWay}" Keyboard="Numeric" VerticalOptions="Center" BackgroundColor="WhiteSmoke" HorizontalOptions="End"/>
+                                    </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+
+                        <CollectionView.EmptyView>
+                            <Label Text="No items selected, yet... " FontAttributes="Italic"/>
+                        </CollectionView.EmptyView>
+                        
+                    </CollectionView>
+                </StackLayout>
+                
+            </ScrollView>
+
+
+            <Button x:Name="GoToInventoryViewButton"
+				Text="Add Items... "                                
+				Command="{Binding GoToInventory}"
+				CommandParameter="{Binding Source={x:Reference GoToInventoryViewButton}, Path=Text}"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
